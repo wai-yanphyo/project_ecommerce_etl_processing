@@ -1,0 +1,508 @@
+{
+  "datasets": [
+    {
+      "name": "f2d668cc",
+      "displayName": "fact_transactions_demon",
+      "config": {
+        "version": "1.1",
+        "source": "ecommerce.gold.fact_transactions_demon",
+        "dimensions": [
+          {
+            "name": "date_id",
+            "expr": "source.date_id",
+            "displayName": "Date Id"
+          },
+          {
+            "name": "transaction_date",
+            "expr": "source.transaction_date",
+            "displayName": "Transaction Date"
+          },
+          {
+            "name": "transaction_ts",
+            "expr": "source.transaction_ts",
+            "displayName": "Transaction Ts"
+          },
+          {
+            "name": "transaction_id",
+            "expr": "source.transaction_id",
+            "displayName": "Transaction Id"
+          },
+          {
+            "name": "customer_id",
+            "expr": "source.customer_id",
+            "displayName": "Customer Id"
+          },
+          {
+            "name": "seq_no",
+            "expr": "source.seq_no",
+            "displayName": "Seq No"
+          },
+          {
+            "name": "product_id",
+            "expr": "source.product_id",
+            "displayName": "Product Id"
+          },
+          {
+            "name": "channel",
+            "expr": "source.channel",
+            "displayName": "Channel"
+          },
+          {
+            "name": "cupon_code",
+            "expr": "source.cupon_code",
+            "displayName": "Cupon Code"
+          },
+          {
+            "name": "cupon_flag",
+            "expr": "source.cupon_flag",
+            "displayName": "Cupon Flag"
+          },
+          {
+            "name": "unit_price_currency",
+            "expr": "source.unit_price_currency",
+            "displayName": "Unit Price Currency"
+          },
+          {
+            "name": "quantity",
+            "expr": "source.quantity",
+            "displayName": "Quantity"
+          },
+          {
+            "name": "unit_price",
+            "expr": "source.unit_price",
+            "displayName": "Unit Price"
+          },
+          {
+            "name": "gross_amount",
+            "expr": "source.gross_amount",
+            "displayName": "Gross Amount"
+          },
+          {
+            "name": "discount_percent",
+            "expr": "source.discount_percent",
+            "displayName": "Discount Percent"
+          },
+          {
+            "name": "discount_amount",
+            "expr": "source.discount_amount",
+            "displayName": "Discount Amount"
+          },
+          {
+            "name": "tax_amount",
+            "expr": "source.tax_amount",
+            "displayName": "Tax Amount"
+          },
+          {
+            "name": "net_amount",
+            "expr": "source.net_amount",
+            "displayName": "Net Amount"
+          },
+          {
+            "name": "net_amount_inr",
+            "expr": "source.net_amount_inr",
+            "displayName": "Net Amount Inr"
+          },
+          {
+            "name": "year",
+            "expr": "source.year",
+            "displayName": "Year"
+          },
+          {
+            "name": "month_name",
+            "expr": "source.month_name",
+            "displayName": "Month Name"
+          },
+          {
+            "name": "day_name",
+            "expr": "source.day_name",
+            "displayName": "Day Name"
+          },
+          {
+            "name": "is_weekend",
+            "expr": "source.is_weekend",
+            "displayName": "Is Weekend"
+          },
+          {
+            "name": "quarter",
+            "expr": "source.quarter",
+            "displayName": "Quarter"
+          },
+          {
+            "name": "week",
+            "expr": "source.week",
+            "displayName": "Week"
+          },
+          {
+            "name": "sku",
+            "expr": "source.sku",
+            "displayName": "Sku"
+          },
+          {
+            "name": "category_code",
+            "expr": "source.category_code",
+            "displayName": "Category Code"
+          },
+          {
+            "name": "category_name",
+            "expr": "source.category_name",
+            "displayName": "Category Name"
+          },
+          {
+            "name": "brand_code",
+            "expr": "source.brand_code",
+            "displayName": "Brand Code"
+          },
+          {
+            "name": "brand_name",
+            "expr": "source.brand_name",
+            "displayName": "Brand Name"
+          },
+          {
+            "name": "color",
+            "expr": "source.color",
+            "displayName": "Color"
+          },
+          {
+            "name": "size",
+            "expr": "source.size",
+            "displayName": "Size"
+          },
+          {
+            "name": "rating_count",
+            "expr": "source.rating_count",
+            "displayName": "Rating Count"
+          },
+          {
+            "name": "hour_of_day",
+            "expr": "source.hour_of_day",
+            "displayName": "Hour Of Day"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "f36bc2ea",
+      "displayName": "Sales",
+      "layout": [
+        {
+          "widget": {
+            "name": "2f743ab0",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Sales Insights"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "ae64f0e4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f2d668cc",
+                  "fields": [
+                    {
+                      "name": "weekly(transaction_date)",
+                      "expression": "DATE_TRUNC(\"WEEK\", `transaction_date`)"
+                    },
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Weekly Sales Trend",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "weekly(transaction_date)",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(net_amount)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "d4e89369",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f2d668cc",
+                  "fields": [
+                    {
+                      "name": "category_name",
+                      "expression": "`category_name`"
+                    },
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Net Amount by Category",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(net_amount)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 1,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "80801650",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f2d668cc",
+                  "fields": [
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    },
+                    {
+                      "name": "day_name",
+                      "expression": "`day_name`"
+                    },
+                    {
+                      "name": "month_name",
+                      "expression": "`month_name`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "heatmap",
+              "encodings": {
+                "x": {
+                  "fieldName": "day_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "month_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "color": {
+                  "fieldName": "sum(net_amount)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 12,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "13983be6",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "bfbc51ad",
+            "queries": [
+              {
+                "name": "dashboards/01f17040693d1b60bc5ef93639c0e571/datasets/01f17040a6c61306bf0ebf4a4da857ad_category_name",
+                "query": {
+                  "datasetName": "f2d668cc",
+                  "fields": [
+                    {
+                      "name": "category_name",
+                      "expression": "`category_name`"
+                    },
+                    {
+                      "name": "category_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "style": {
+                "fontColor": {
+                  "dark": "#10E460"
+                }
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "category_name",
+                    "queryName": "dashboards/01f17040693d1b60bc5ef93639c0e571/datasets/01f17040a6c61306bf0ebf4a4da857ad_category_name"
+                  }
+                ]
+              }
+            },
+            "specExtensions": {
+              "widgetBorderColor": {
+                "dark": "#21B564"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
