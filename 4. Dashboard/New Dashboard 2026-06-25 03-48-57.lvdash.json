@@ -233,11 +233,14 @@
               }
             ],
             "spec": {
-              "version": 3,
               "frame": {
-                "title": "Weekly Sales Trend",
-                "showTitle": true
+                "showTitle": true,
+                "title": {
+                  "value": "Weekly Sales Trend",
+                  "fields": []
+                }
               },
+              "version": 3,
               "widgetType": "line",
               "encodings": {
                 "x": {
@@ -463,13 +466,13 @@
             ],
             "spec": {
               "version": 2,
-              "frame": {
-                "showTitle": true
-              },
               "style": {
                 "fontColor": {
                   "dark": "#10E460"
                 }
+              },
+              "frame": {
+                "showTitle": true
               },
               "widgetType": "filter-single-select",
               "encodings": {
